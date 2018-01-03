@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ctl.lbs.ui.LoginActivity">
+
+    <RelativeLayout
+        android:id="@+id/login_top"
+        android:background="@drawable/category_expandlv_itemone_bg_normal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center|left"
+            android:text="路测任务"
+            android:textStyle="bold"
+            android:paddingLeft="10dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_20sp" />
+
+        <Button
+            android:id="@+id/new_task_top_btn"
+            android:layout_alignParentRight="true"
+            android:text="新建任务"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:background="@drawable/btn_style"
+            android:layout_width="150dp"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey_3" />
+    <ListView
+        android:id="@+id/task_listview"
+        android:layout_below="@id/login_top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@color/grey_3"
+        android:dividerHeight="0.5dip" />
+    <!--<LinearLayout-->
+        <!--android:id="@+id/null_task_liner"-->
+        <!--android:layout_below="@id/login_top"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="@dimen/size_20sp"-->
+            <!--android:text="暂无工作任务"/>-->
+        <!--<Button-->
+            <!--android:id="@+id/new_task_center_btn"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="+点击新建任务"/>-->
+    <!--</LinearLayout>-->
+    <!--<LinearLayout-->
+        <!--android:layout_width="fill_parent" android:layout_height="50dp"         android:layout_weight="1"-->
+        <!--android:background="@color/blue_1"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:orientation="horizontal">-->
+        <!--<Button-->
+            <!--android:id="@+id/login_find_bts_btn"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="基站查询"-->
+            <!--android:background="@drawable/btn_style"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:visibility="gone"/>-->
+        <!--<Button-->
+            <!--android:id="@+id/login_offlinemap_btn"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="离线地图"-->
+            <!--android:background="@drawable/btn_style"-->
+            <!--android:layout_height="match_parent" />-->
+        <!--<Button-->
+            <!--android:id="@+id/login_import_btn"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="文件导入"-->
+            <!--android:background="@drawable/btn_style"-->
+            <!--android:layout_height="match_parent" />-->
+        <!--<Button-->
+            <!--android:id="@+id/login_export_btn"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="文件导出"-->
+            <!--android:background="@drawable/btn_style"-->
+            <!--android:layout_height="match_parent" />-->
+        <!--<Button-->
+            <!--android:id="@+id/login_upload_btn"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="文件上传"-->
+            <!--android:background="@drawable/btn_style"-->
+            <!--android:layout_height="match_parent" />-->
+        <!--<Button-->
+            <!--android:id="@+id/main_config_btn"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight="1"-->
+
+            <!--android:text="配置"-->
+            <!--android:background="@drawable/btn_style"-->
+            <!--android:layout_height="match_parent" />-->
+    <!--</LinearLayout>-->
+</LinearLayout>

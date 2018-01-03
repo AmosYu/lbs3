@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">路测3.0</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+
+    <string name="message_confirm_to_exit">确定要退出吗?</string>
+    <string name="title_dialog_exit_confirm">确认退出</string>
+    <string-array name="mode_arrays">
+        <item>仅显示轨迹</item>
+        <item>GSM移动</item>
+        <item>GSM联通</item>
+        <item>WCDMA</item>
+        <item>CDMA</item>
+        <item>TD-SCDMA</item>
+        <item>LTE移动</item>
+        <item>LTE联通</item>
+        <item>LTE电信</item>
+    </string-array>
+    <string-array name="frequency_arrays">
+        <item>1秒</item>
+        <item>2秒</item>
+        <item>3秒</item>
+        <item>4秒</item>
+        <item>5秒</item>
+        <item>8秒</item>
+        <item>10秒</item>
+        <item>20秒</item>
+        <item>30秒</item>
+    </string-array>
+</resources>

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context="com.ctl.lbs.ui.MapFindActivity">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        >
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_weight="6"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_weight="2"
+                android:layout_height="match_parent">
+
+                <Spinner
+                    android:id="@+id/set_mnc_mode"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    ></Spinner>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_weight="3"
+                android:layout_height="match_parent">
+                <CheckBox
+                    android:id="@+id/Hex"
+                    android:textSize="@dimen/size_15sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:checked="false"
+                    android:text="16进制"
+                    ></CheckBox>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_weight="3"
+                android:layout_height="match_parent">
+                <Button
+                    android:id="@+id/pos_btn"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="@dimen/size_15sp"
+                    android:gravity="center"
+                    android:text="当前位置"
+                    android:background="@drawable/btn_style"
+                    ></Button>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_weight="6"
+            android:layout_height="match_parent">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_weight="2"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/lac_text_id"
+                    android:text="LAC"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="@dimen/size_15sp"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:textColor = "#000000">
+                </TextView>
+                <EditText
+                    android:id="@+id/lac_str"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="@dimen/size_15sp"
+                    android:singleLine="true"
+                    android:lines="1"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:gravity="center"
+                    android:textColor = "#ff8c00"
+                    android:layout_marginRight="2dip"
+                    android:numeric="integer"
+                    />
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_weight="2"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/cell_text_id"
+                    android:text="CELL"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="@dimen/size_15sp"
+                    android:gravity="center"
+                    android:layout_weight="2"
+                    android:textColor = "#000000">
+                </TextView>
+                <EditText
+                    android:id="@+id/cellid_str"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="@dimen/size_15sp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor = "#ff8c00"
+                    android:text=""
+                    android:layout_marginRight="2dip"
+                    android:numeric="integer"
+                    android:singleLine="true"
+                    android:lines="1"
+                    />
+            </LinearLayout>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/bid_liner"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_weight="2"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+                <TextView
+                    android:text="BID:"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="@dimen/size_15sp"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:textColor = "#000000">
+                </TextView>
+                <EditText
+                    android:id="@+id/Bid_str"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="@dimen/size_15sp"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:gravity="center"
+                    android:textColor = "#ff8c00"
+                    android:singleLine="true"
+                    android:lines="1"
+                    android:numeric="integer"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_weight="6"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_weight="3"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/qure_btn"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="@dimen/size_15sp"
+                    android:gravity="center"
+                    android:text="查询"
+                    android:background="@drawable/btn_style"
+                    ></Button>
+                <Button
+                    android:id="@+id/daohang_btn"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="@dimen/size_15sp"
+                    android:gravity="center"
+                    android:text="开始导航"
+                    android:background="@drawable/btn_style"
+                    ></Button>
+                <Button
+                    android:id="@+id/clear_btn"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="@dimen/size_15sp"
+                    android:gravity="center"
+                    android:text="清空地图"
+                    android:background="@drawable/btn_style"
+                    ></Button>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <com.baidu.mapapi.map.MapView
+            android:id="@+id/find_bmapView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="5dp"
+            android:clickable="true"
+            android:layout_weight="1"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="@color/grey_1"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="基站查询数据显示:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_18sp"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:visibility="gone"/>
+        <ListView
+            android:id="@+id/cell_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:layout_marginLeft="8dp"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+</LinearLayout>

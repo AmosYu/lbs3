@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="110dp"
+    android:orientation="vertical">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent" android:layout_height="40dp"
+        android:orientation="horizontal">
+        <TextView
+            android:text="IP:"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:textColor="@color/black"/>
+        <EditText
+            android:id="@+id/sever_ip_edit"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="40dp"
+            android:gravity="center|left"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="@color/black"/>
+        <TextView
+            android:text="端口:"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:textColor="@color/black"/>
+        <EditText
+            android:id="@+id/sever_port_edit"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:gravity="center|left"
+            android:inputType="number"
+            android:maxLines="1"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    >
+    <CheckBox
+        android:id="@+id/dir_check"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:clickable="false"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"/>
+    <TextView
+        android:id="@+id/dir_name"
+        android:textSize="@dimen/text_size_14"
+        android:gravity="center|left"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

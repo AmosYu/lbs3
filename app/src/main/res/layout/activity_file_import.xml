@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.FileImportActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/category_expandlv_itemone_bg_normal"
+            android:orientation="horizontal">
+            <CheckBox
+                android:id="@+id/dir_allcheck"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:gravity="center|left"
+                android:text="数据文件夹"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16" />
+            <Button
+                android:id="@+id/file_action_btn"
+                android:layout_width="100dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:layout_height="40dp"
+                android:text="导入"
+                android:background="@drawable/btn_style"
+                android:textSize="@dimen/text_size_16" />
+            />
+        </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_3" />
+
+        <ListView
+            android:id="@+id/dir_listview"
+            android:layout_below="@id/dir_allcheck"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/grey_3"
+            android:dividerHeight="0.5dip"
+            android:background="@color/white"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"></ListView>
+
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_weight="0"
+        android:background="@color/grey_3" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/file_log_title"
+            android:text="上传进度"
+            android:textSize="@dimen/text_size_16"
+            android:paddingLeft="20dp"
+            android:gravity="center|left"
+            android:background="@drawable/category_expandlv_itemone_bg_normal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="0"
+            android:background="@color/grey_3" />
+
+        <ListView
+            android:id="@+id/file_log_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/grey_3"
+            android:background="@color/white"
+            android:dividerHeight="0.5dp"
+         ></ListView>
+    </LinearLayout>
+    
+
+</LinearLayout>
