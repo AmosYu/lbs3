@@ -66,7 +66,8 @@ public class BaiduMapUtil {
      */
     public void addMarker(double lat, double lon, String info, float progressR, float progressG, float progressB, float progressA){
         LatLng point = new LatLng(lat, lon);
-        float[] src = new float[]{progressR, 0, 0, 0, 0,
+        float[] src = new float[]{
+                progressR, 0, 0, 0, 0,
                 0, progressG, 0, 0, 0,
                 0, 0, progressB, 0, 0,
                 0, 0, 0, progressA, 0};
