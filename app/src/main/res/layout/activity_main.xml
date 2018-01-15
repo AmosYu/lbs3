@@ -66,7 +66,7 @@
         android:layout_below="@id/main_top_liner"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="185dp"
         android:orientation="vertical">
         <LinearLayout
             android:id="@+id/listview_head"
@@ -153,168 +153,168 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/listview_head"
-            android:layout_marginBottom="125dp"
             android:background="@color/black_4"
             android:dividerHeight="0.5dp"
             android:divider="@color/black_3"
             android:listSelector="@android:color/transparent" />
 
-        <LinearLayout
-            android:id="@+id/btstype"
-            android:layout_width="match_parent"
-            android:layout_height="125dp"
-            android:background="@color/grey_2"
-            android:layout_alignParentBottom="true"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:id="@+id/first_group"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/gsm_m_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/btn_green_style"
-                    android:gravity="center"
-                    android:paddingTop="1.0dip"
-                    android:textColor="@color/black"
-                    android:text="移动G" />
-
-                <TextView
-                    android:id="@+id/gsm_u_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/btn_style"
-                    android:gravity="center"
-                    android:paddingTop="1.0dip"
-                    android:textColor="@color/black"
-                    android:text="联通G" />
-
-                <TextView
-                    android:id="@+id/cdma_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:textColor="@color/black"
-                    android:background="@drawable/btn_style"
-                    android:gravity="center"
-                    android:paddingTop="1.0dip"
-                    android:text="电信C" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/second_group"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/td_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/btn_style"
-                    android:gravity="center"
-                    android:textColor="@color/black"
-                    android:paddingTop="1.0dip"
-                    android:text="移动TD" />
-
-                <TextView
-                    android:id="@+id/wcdma_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/btn_style"
-                    android:gravity="center"
-                    android:textColor="@color/black"
-                    android:paddingTop="1.0dip"
-                    android:text="联通W" />
-
-                <TextView
-                    android:id="@+id/wifi_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/btn_style"
-                    android:gravity="center"
-                    android:textColor="@color/black"
-                    android:paddingTop="1.0dip"
-                    android:text="WIFI" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/third_group"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/ltem_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/btn_style"
-                    android:gravity="center"
-                    android:paddingTop="1.0dip"
-                    android:textColor="@color/black"
-                    android:text="移动LTE" />
-
-                <TextView
-                    android:id="@+id/lteu_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/btn_style"
-                    android:gravity="center"
-                    android:paddingTop="1.0dip"
-                    android:textColor="@color/black"
-                    android:text="联通lTE" />
-
-                <TextView
-                    android:id="@+id/ltet_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/btn_style"
-                    android:gravity="center"
-                    android:textColor="@color/black"
-                    android:paddingTop="1.0dip"
-                    android:text="电信LTE" />
-            </LinearLayout>
-        </LinearLayout>
     </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/btstype"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:background="@color/grey_2"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/first_group"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/gsm_m_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_green_style"
+                android:gravity="center"
+                android:paddingTop="1.0dip"
+                android:textColor="@color/black"
+                android:text="移动G" />
+
+            <TextView
+                android:id="@+id/gsm_u_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_style"
+                android:gravity="center"
+                android:paddingTop="1.0dip"
+                android:textColor="@color/black"
+                android:text="联通G" />
+
+            <TextView
+                android:id="@+id/cdma_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:background="@drawable/btn_style"
+                android:gravity="center"
+                android:paddingTop="1.0dip"
+                android:text="电信C" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/second_group"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/td_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_style"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:paddingTop="1.0dip"
+                android:text="移动TD" />
+
+            <TextView
+                android:id="@+id/wcdma_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_style"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:paddingTop="1.0dip"
+                android:text="联通W" />
+
+            <TextView
+                android:id="@+id/wifi_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_style"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:paddingTop="1.0dip"
+                android:text="WIFI" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/third_group"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/ltem_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_style"
+                android:gravity="center"
+                android:paddingTop="1.0dip"
+                android:textColor="@color/black"
+                android:text="移动LTE" />
+
+            <TextView
+                android:id="@+id/lteu_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_style"
+                android:gravity="center"
+                android:paddingTop="1.0dip"
+                android:textColor="@color/black"
+                android:text="联通lTE" />
+
+            <TextView
+                android:id="@+id/ltet_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_style"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:paddingTop="1.0dip"
+                android:text="电信LTE" />
+        </LinearLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/main_buttom_liner"
@@ -393,7 +393,7 @@
         android:layout_below="@id/main_top_liner"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="60dp">
+        android:layout_marginBottom="185dp">
 
         <com.baidu.mapapi.map.MapView
             android:id="@+id/main_mapview"

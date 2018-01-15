@@ -209,7 +209,7 @@ public class LuceCellInfo implements Serializable{
         this.time = time;
     }
 
-    public int getSid() {
+    public int getSid()  {
         return sid;
     }
 

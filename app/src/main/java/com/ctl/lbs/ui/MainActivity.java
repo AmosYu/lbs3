@@ -73,9 +73,9 @@ public class MainActivity extends Activity implements Observer,View.OnClickListe
     private BluetoothConn bluetoothConn;
     private ProcessBtsData processBtsData;
     private MapView mMapView = null;
-    private BaiduMap mBaiduMap=null;
-    private LocationService locationService=null;
-    private LocationPoint point=null;
+    private BaiduMap mBaiduMap = null;
+    private LocationService locationService = null;
+    private LocationPoint point = null;
     private View mapRelaView;
     private TextView saveDataBtn;
 
@@ -606,6 +606,7 @@ public class MainActivity extends Activity implements Observer,View.OnClickListe
             case R.id.main_bottom_left:
                 clearBottom();
                 maplayoutView.setVisibility(View.VISIBLE);
+                switchButtonView.setVisibility(View.VISIBLE);
                 dataView.setVisibility(View.GONE);
                 moreView.setVisibility(View.GONE);
                 bottomLeftTv.setTextColor(Color.GREEN);
@@ -615,6 +616,7 @@ public class MainActivity extends Activity implements Observer,View.OnClickListe
                 clearBottom();
                 maplayoutView.setVisibility(View.GONE);
                 dataView.setVisibility(View.VISIBLE);
+                switchButtonView.setVisibility(View.VISIBLE);
                 moreView.setVisibility(View.GONE);
                 bottomMiddleTv.setTextColor(Color.GREEN);
                 bottomMiddleImage.setBackgroundResource(R.drawable.data_green);
@@ -623,6 +625,7 @@ public class MainActivity extends Activity implements Observer,View.OnClickListe
                 clearBottom();
                 dataView.setVisibility(View.GONE);
                 maplayoutView.setVisibility(View.GONE);
+                switchButtonView.setVisibility(View.GONE);
                 moreView.setVisibility(View.VISIBLE);
                 bottomRightTv.setTextColor(Color.GREEN);
                 bottomRightImage.setBackgroundResource(R.drawable.right_green);
@@ -642,7 +645,7 @@ public class MainActivity extends Activity implements Observer,View.OnClickListe
     }
 
     private View maplayoutView;
-    private View dataView;
+    private View dataView,switchButtonView;
     private GridView moreGridView;
     private TextView logoView,gpsView;
     private View moreView;
@@ -653,6 +656,7 @@ public class MainActivity extends Activity implements Observer,View.OnClickListe
         mMapView=(MapView) findViewById(R.id.main_mapview);
         mapRelaView = findViewById(R.id.main_map_rela);
         mapRelaView.setVisibility(View.INVISIBLE);
+        switchButtonView = findViewById(R.id.btstype);
         moreGridView = (GridView)findViewById(R.id.more_grid_view);
         moreView = findViewById(R.id.more_view);
         moreView.setVisibility(View.GONE);

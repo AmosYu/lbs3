@@ -13,6 +13,8 @@ import com.baidu.mapapi.model.LatLng;
 import com.ctl.lbs.cell.BtsType;
 import com.ctl.lbs.cell.LuceCellInfo;
 import com.ctl.lbs.cell.WifiInfo;
+import com.ctl.lbs.utils.Gps2BaiDu;
+import com.ctl.lbs.utils.Utils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -34,11 +36,16 @@ public class DbAcessImpl implements DbAccess {
 
     private SQLiteDatabase dbWrite;
     private SQLiteDatabase dbRead;
+    private SQLiteDatabase rizhi = null;
 
     private DbAcessImpl(Context context) {
         dHelper = DetectiveHelper.getInstance(context);
         dbRead = dHelper.getReadableDatabase();
         dbWrite = dHelper.getWritableDatabase();
+        File file = new File(Environment.getExternalStorageDirectory() + File.separator + "db" + File.separator, "db.db");
+        if (file.exists()) {
+            rizhi = openOrCreateDatabase(file, null);
+        }
     }
 
     public static DbAcessImpl getDbInstance(Context context) {
@@ -370,17 +377,28 @@ public class DbAcessImpl implements DbAccess {
     @Override
     public ArrayList<String> FindPos(String mnc, String lac, String cellid) {
         ArrayList<String> list = new ArrayList<>();
-        File file = new File(Environment.getExternalStorageDirectory() + File.separator + "db" + File.separator, "db.db");
-        if (file.exists()) {
-            SQLiteDatabase rizhi = openOrCreateDatabase(file, null);
-            Cursor cursor = rizhi.rawQuery("select lat,lon from cellinfo where mnc =? and lac =? and ci =? ",
-                    new String[]{mnc, lac, cellid});
-
+        if (rizhi!=null) {
+            Cursor cursor = rizhi.rawQuery("select lat,lon from cellinfo where mnc =? and lac =? and ci =? ",new String[]{mnc, lac, cellid});
             while (cursor.moveToNext()) {
                 double latitude = cursor.getDouble(0);
                 double longitude = cursor.getDouble(1);
                 list.add(latitude + "");
                 list.add(longitude + "");
+            }
+        }
+        return list;
+    }
+
+
+    public ArrayList<LatLng> findPos(String mnc, String lac, String cellid) {
+        ArrayList<LatLng> list = new ArrayList<>();
+        if (rizhi!=null) {
+            Cursor cursor = rizhi.rawQuery("select lat,lon from cellinfo where mnc =? and lac =? and ci =? ",new String[]{mnc, lac, cellid});
+            while (cursor.moveToNext()) {
+                double latitude = cursor.getDouble(0);
+                double longitude = cursor.getDouble(1);
+                LatLng latLng = Gps2BaiDu.gpsToBaidu(latitude,longitude);
+                list.add(latLng);
             }
         }
         return list;
