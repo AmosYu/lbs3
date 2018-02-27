@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,7 +16,7 @@
             android:id="@+id/main_top_left"
             android:layout_width="40dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="1dp"
+            android:layout_marginStart="1dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/logo_grey"
@@ -33,13 +32,13 @@
             android:layout_toRightOf="@id/main_top_left"
             android:paddingLeft="10dp"
             android:textStyle="bold"
-            android:text="路测3.0" />
+            android:text="路测采集控制端" />
 
         <TextView
             android:id="@+id/main_top_gps"
             android:layout_width="45dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@id/main_top_logotext"
             android:background="@drawable/gps_grey"
@@ -51,10 +50,9 @@
             android:layout_marginRight="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:background="@drawable/btn_style"
             android:textSize="@dimen/size_15sp"
             android:textColor="@color/white"
             android:text="保存数据"
@@ -298,7 +296,7 @@
                 android:gravity="center"
                 android:paddingTop="1.0dip"
                 android:textColor="@color/black"
-                android:text="联通lTE" />
+                android:text="联通LTE" />
 
             <TextView
                 android:id="@+id/ltet_tv"
@@ -341,7 +339,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="轨迹查询" />
+                android:text="地图模式" />
 
         </LinearLayout>
 
@@ -363,7 +361,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
 
-                android:text="实时数据" />
+                android:text="数据模式" />
 
         </LinearLayout>
         <LinearLayout

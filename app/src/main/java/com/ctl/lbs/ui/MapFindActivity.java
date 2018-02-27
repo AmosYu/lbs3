@@ -331,7 +331,7 @@ public class MapFindActivity extends Activity {
             //查询后台服务器
             new FindPos(luceCellInfo).execute();
         }else if (flag==1){//长按
-                    findDbImpl();
+            findDbImpl();
         }
     }
     Handler handler=new Handler(){
@@ -596,7 +596,6 @@ public class MapFindActivity extends Activity {
                 List<String> list=new ArrayList<>();
                 list=impl.FindPos(mnc,lac,cellid);
                 if(!list.isEmpty()) {
-//                    luceCellInfos.add(cellInfo);
                     baiduMapUtil.addMarker(Double.valueOf(list.get(0)), Double.valueOf(list.get(1)),
                             "基站信息："+parameters[0]+","+parameters[1]+","+parameters[2]+"\n"+"手机数据库数据",
                             251f, 93f, 255f, 1f);
@@ -608,7 +607,6 @@ public class MapFindActivity extends Activity {
                     builder.show();
                 }
             }
-//            lacDataAdapter.notifyDataSetChanged();
         }
     }
     private boolean GetRequestParam() {
@@ -622,7 +620,6 @@ public class MapFindActivity extends Activity {
         bid = bid_edit.getText().toString().trim();
         if(mode_index== dataCode.cdma)
         {
-//            lac_text.setText("SID:");
             if(net==2)
             {
                 mnc = "11";
@@ -663,9 +660,7 @@ public class MapFindActivity extends Activity {
                 mode = dataCode.fdd_lte;
                 mnc = "01";
             }
-
         }
-
         if(NumCheck.isNumeric(mcc)==true)
         {
             if(NumCheck.isNumeric(mnc)==true)

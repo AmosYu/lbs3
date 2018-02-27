@@ -56,6 +56,7 @@ public class TrackActivity extends Activity {
     private LinearLayout baidumap_infowindow;
     private MarkerOnInfoWindowClickListener markerListener;
     private void initMap() {
+        mMapView = (MapView)findViewById(R.id.track_mapView);
         baidumap_infowindow = (LinearLayout) LayoutInflater.from (context).inflate (R.layout.baidu_map_infowindow, null);
         mBaiduMap = mMapView.getMap();
         markerListener = new MarkerOnInfoWindowClickListener();
@@ -172,7 +173,6 @@ public class TrackActivity extends Activity {
     }
 
     private void  addBtsInfoToMap(){
-
         int i = 0;
         for(ArrayList<LuceCellInfo> luceCellInfos:btsInfoList){
             for(LuceCellInfo luceCellInfo : luceCellInfos){

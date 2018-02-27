@@ -28,6 +28,7 @@ import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
 import com.baidu.location.Poi;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
@@ -120,13 +121,13 @@ public class MainActivity extends Activity implements Observer,View.OnClickListe
     private void initMap() {
         baidumap_infowindow = (LinearLayout) LayoutInflater.from (context).inflate (R.layout.baidu_map_infowindow, null);
         mBaiduMap = mMapView.getMap();
+        mBaiduMap.setMyLocationEnabled(true);
         markerListener = new MarkerOnInfoWindowClickListener ();
         //普通地图
         mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
         mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-
                 createInfoWindow(baidumap_infowindow,(LuceCellInfo)  marker.getExtraInfo ().get ("marker"));
                 final LatLng ll = marker.getPosition();
                 mInfoWindow = new InfoWindow (BitmapDescriptorFactory.fromView (baidumap_infowindow), ll, -47, markerListener);
@@ -174,33 +175,9 @@ public class MainActivity extends Activity implements Observer,View.OnClickListe
         mainListView=(ListView)findViewById(R.id.main_listview);
         wifiList = new ArrayList<>();
         cellListData = new ArrayList<>();
-        wifiList.addAll(initWifiList());
-        cellListData.addAll(initLuceList());
         adapter=new CellInfoAdapter(this, cellListData,R.layout.extend_listview_item);
         mainListView.setAdapter(adapter);
         wifiInfoAdapter = new WifiInfoAdapter(this, wifiList, R.layout.wifi_item);
-    }
-
-    private ArrayList<WifiInfo> initWifiList(){
-        ArrayList<WifiInfo> wifiList = new ArrayList<>();
-        int i = 10;
-        while (i>0){
-            WifiInfo wifiInfo = new WifiInfo();
-            wifiList.add(wifiInfo);
-            i--;
-        }
-        return wifiList;
-    }
-
-    private ArrayList<LuceCellInfo> initLuceList(){
-        ArrayList<LuceCellInfo> luceCellInfos = new ArrayList<>();
-        int i = 10;
-        while (i>0){
-            LuceCellInfo luceCellInfo = new LuceCellInfo();
-            luceCellInfos.add(luceCellInfo);
-            i--;
-        }
-        return luceCellInfos;
     }
 
     private void updateDevConState(final BluetoothState state) {
@@ -211,12 +188,13 @@ public class MainActivity extends Activity implements Observer,View.OnClickListe
                     if(state == BluetoothState.CONNECTED) {
                         logoView.setBackgroundResource(R.drawable.logo_green);
                         saveDataBtn.setEnabled(true);
-                        saveDataBtn.setBackgroundResource(R.drawable.btn_green_style);
+//                        saveDataBtn.setBackgroundResource(R.drawable.btn_green_style);
+                        saveDataBtn.setTextColor(Color.GREEN);
                     }
                     else {
                         logoView.setBackgroundResource(R.drawable.logo_grey);
                         saveDataBtn.setEnabled(false);
-                        saveDataBtn.setBackgroundResource(R.drawable.btn_style);
+                        saveDataBtn.setTextColor(Color.WHITE);
                     }
                 }
             });
@@ -239,6 +217,18 @@ public class MainActivity extends Activity implements Observer,View.OnClickListe
                         wifiList.clear();
                         wifiList.addAll(processBtsData.wifiList);
                         wifiInfoAdapter.notifyDataSetChanged();
+                        if(processBtsData.getCurrentType()!=BtsType.WIFI){
+                            for(LuceCellInfo luceCellInfo:cellListData){
+                                if(luceCellInfo.getLac()!=0&&luceCellInfo.getCellId()!=0) {
+                                    ArrayList<LatLng> list = DbAcessImpl.getDbInstance(context).findPos(
+                                            processBtsData.getCurrentType(), luceCellInfo.getLacStr(), luceCellInfo.getCiStr());
+                                    if(list.size()>0){
+                                        LatLng latLng = list.get(0);
+                                        addOnMap(luceCellInfo,latLng);
+                                    }
+                                }
+                            }
+                        }
                     }
                 });
             }
@@ -271,6 +261,40 @@ public class MainActivity extends Activity implements Observer,View.OnClickListe
         }
     }
 
+    private ArrayList<LatLng> mapBtsList = new ArrayList<>();
+    private boolean inMapList(LatLng latLng){
+        for(LatLng mapLatLng:mapBtsList){
+            if(mapLatLng.latitude==latLng.latitude&&mapLatLng.longitude==latLng.longitude){
+                return true;
+            }
+        }
+        return false;
+    }
+    private void addOnMap(LuceCellInfo luceCellInfo,LatLng latLng){
+
+        if(mapBtsList.size()>50){
+            mapBtsList.clear();
+            mBaiduMap.clear();
+        }
+
+        if(!inMapList(latLng)) {
+            mapBtsList.add(latLng);
+            BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.p6);
+            //构建MarkerOption，用于在地图上添加Marker
+            OverlayOptions option = new MarkerOptions().position(latLng).icon(bitmap).title("大区:" + luceCellInfo.getLacStr() + "小区:" + luceCellInfo.getCiStr());
+            //定义地图状态
+            MapStatus mMapStatus = new MapStatus.Builder().target(latLng).zoom(18).build();
+            //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
+            MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+            //改变地图状态
+            mBaiduMap.setMapStatus(mMapStatusUpdate);
+            //在地图上添加Marker，并显示
+            Marker marker = (Marker) mBaiduMap.addOverlay(option);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("marker", luceCellInfo);
+            marker.setExtraInfo(bundle);
+        }
+    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -295,17 +319,16 @@ public class MainActivity extends Activity implements Observer,View.OnClickListe
 
     private void createInfoWindow(LinearLayout baidumap_infowindow,LuceCellInfo luceCellInfo){
         InfoWindowHolder holder = null;
-        holder = new InfoWindowHolder ();
+        holder = new InfoWindowHolder();
         holder.tv_title = (TextView) baidumap_infowindow.findViewById (R.id.map_window_title);
         holder.tv_content = (TextView) baidumap_infowindow.findViewById (R.id.map_window_content);
         String title = null;
         StringBuffer sb = new StringBuffer();
-        sb.append("邻区\n");
         if(luceCellInfo.getBtsType()==BtsType.CDMA){
-            title = luceCellInfo.getBtsType()+"大区号：("+luceCellInfo.getLac()+","+luceCellInfo.getCellId()+")"+"，小区号："+luceCellInfo.getBid()+"，场强："+luceCellInfo.getRssi();
+            title = luceCellInfo.getBtsType()+"大区：("+luceCellInfo.getLac()+","+luceCellInfo.getCellId()+")"+"\r\n小区："+luceCellInfo.getBid()+"\r\n场强："+luceCellInfo.getRssi();
         }
         else{
-            title = luceCellInfo.getBtsType()+"，大区号："+luceCellInfo.getLac()+"，小区号："+luceCellInfo.getCellId()+"，场强："+luceCellInfo.getRssi();
+            title = "大区："+luceCellInfo.getLac()+"\r\n小区："+luceCellInfo.getCellId()+"\r\n场强："+luceCellInfo.getRssi();
             DbAcessImpl dbAcess = DbAcessImpl.getDbInstance(context);
             ArrayList<LuceCellInfo> list = new ArrayList<>();
             list.addAll(dbAcess.findOnlySameLacBts(String.valueOf(luceCellInfo.getLac()),luceCellInfo.getBtsType().toString(),luceCellInfo.getLatitudeGps(),luceCellInfo.getLongitudeGps(),ProcessBtsData.mark));
@@ -324,7 +347,6 @@ public class MainActivity extends Activity implements Observer,View.OnClickListe
 
         @Override
         public void onReceiveLocation(BDLocation location) {
-            // TODO Auto-generated method stub
             if (null != location && location.getLocType() != BDLocation.TypeServerError) {
                 if (location == null)
                     return;
@@ -333,7 +355,7 @@ public class MainActivity extends Activity implements Observer,View.OnClickListe
                         .accuracy(location.getRadius()).direction(100)// 精度范围
                         .latitude(location.getLatitude())// 经度
                         .longitude(location.getLongitude()).build();// 纬度
-                Log.e("MainActivity",MyApplication.getInstance().getLocData().latitude+","+MyApplication.getInstance().getLocData().longitude);
+                Log.i("MainActivity",MyApplication.getInstance().getLocData().latitude+","+MyApplication.getInstance().getLocData().longitude);
                 mBaiduMap.setMyLocationData(MyApplication.getInstance().getLocData());
 
                 if (null != location && location.getLocType() != BDLocation.TypeServerError) {
@@ -347,40 +369,7 @@ public class MainActivity extends Activity implements Observer,View.OnClickListe
                         baiduLongitude = 0;
                     }
                 }
-                StringBuffer sb = new StringBuffer(256);
-                sb.append("time : ");
-                /**
-                 * 时间也可以使用systemClock.elapsedRealtime()方法 获取的是自从开机以来，每次回调的时间；
-                 * location.getTime() 是指服务端出本次结果的时间，如果位置不发生变化，则时间不变
-                 */
-                sb.append(location.getTime());
-                sb.append("\nerror code : ");
-                sb.append(location.getLocType());
-                sb.append("\nlatitude : ");
-                sb.append(location.getLatitude());
-                sb.append("\nlontitude : ");
-                sb.append(location.getLongitude());
-                sb.append("\nradius : ");
-                sb.append(location.getRadius());
-                sb.append("\nCountryCode : ");
-                sb.append(location.getCountryCode());
-                sb.append("\nCountry : ");
-                sb.append(location.getCountry());
-                sb.append("\ncitycode : ");
-                sb.append(location.getCityCode());
-                sb.append("\ncity : ");
-                sb.append(location.getCity());
-                sb.append("\nDistrict : ");
-                sb.append(location.getDistrict());
-                sb.append("\nStreet : ");
-                sb.append(location.getStreet());
-                sb.append("\naddr : ");
-                sb.append(location.getAddrStr());
-                sb.append("\nDescribe: ");
-                sb.append(location.getLocationDescribe());
-                sb.append("\nDirection(not all devices have value): ");
-                sb.append(location.getDirection());
-                sb.append("\nPoi: ");
+
                 //*****************************
                 point=new LocationPoint();
                 point.setLat(location.getLatitude());
@@ -390,44 +379,8 @@ public class MainActivity extends Activity implements Observer,View.OnClickListe
                 }else{
 
                 }
-                Log.e("MainActivity",point.getLat()+","+point.getLon()+","+point.getAddress());
-//                NeighborCell.getInstance(context).sendObservableNotice(new NoticeData(MessageType.AUTO_COLLEC_FINISH,""));
-                //*********************************
-                if (location.getPoiList() != null && !location.getPoiList().isEmpty()) {
-                    for (int i = 0; i < location.getPoiList().size(); i++) {
-                        Poi poi = (Poi) location.getPoiList().get(i);
-                        sb.append(poi.getName() + ";");
-                    }
-                }
-                if (location.getLocType() == BDLocation.TypeGpsLocation) {// GPS定位结果
-                    sb.append("\nspeed : ");
-                    sb.append(location.getSpeed());// 单位：km/h
-                    sb.append("\nsatellite : ");
-                    sb.append(location.getSatelliteNumber());
-                    sb.append("\nheight : ");
-                    sb.append(location.getAltitude());// 单位：米
-                    sb.append("\ndescribe : ");
-                    sb.append("gps定位成功");
-                } else if (location.getLocType() == BDLocation.TypeNetWorkLocation) {// 网络定位结果
-                    // 运营商信息
-                    sb.append("\noperationers : ");
-                    sb.append(location.getOperators());
-                    sb.append("\ndescribe : ");
-                    sb.append("网络定位成功");
-                } else if (location.getLocType() == BDLocation.TypeOffLineLocation) {// 离线定位结果
-                    sb.append("\ndescribe : ");
-                    sb.append("离线定位成功，离线定位结果也是有效的");
-                } else if (location.getLocType() == BDLocation.TypeServerError) {
-                    sb.append("\ndescribe : ");
-                    sb.append("服务端网络定位失败，可以反馈IMEI号和大体定位时间到loc-bugs@baidu.com，会有人追查原因");
-                } else if (location.getLocType() == BDLocation.TypeNetWorkException) {
-                    sb.append("\ndescribe : ");
-                    sb.append("网络不同导致定位失败，请检查网络是否通畅");
-                } else if (location.getLocType() == BDLocation.TypeCriteriaException) {
-                    sb.append("\ndescribe : ");
-                    sb.append("无法获取有效定位依据导致定位失败，一般是由于手机的原因，处于飞行模式下一般会造成这种结果，可以试着重启手机");
-                }
-                Log.d("Loc",sb.toString());
+                Log.i("MainActivity",point.getLat()+","+point.getLon()+","+point.getAddress()+","+location.getAltitude());
+//                bluetoothConn.sendCmd("BC+SETGPS="+location.getLongitude()+","+location.getLatitude()+","+location.getAltitude());
             }
         }
 
@@ -541,6 +494,8 @@ public class MainActivity extends Activity implements Observer,View.OnClickListe
 
     private void changeType(BtsType btsType,TextView selectedTv){
         processBtsData.setCurrentType(btsType);
+        mapBtsList.clear();
+        mBaiduMap.clear();
         clearDataSwitchItem();
         if(btsType == BtsType.WIFI){
             mainListView.setAdapter(wifiInfoAdapter);
@@ -557,7 +512,6 @@ public class MainActivity extends Activity implements Observer,View.OnClickListe
             wifiList.addAll(processBtsData.wifiList);
             wifiInfoAdapter.notifyDataSetChanged();
         }else {
-
             cellListData.clear();
             cellListData.addAll(processBtsData.getLuceInfoList());
             adapter.notifyDataSetChanged();
@@ -633,15 +587,14 @@ public class MainActivity extends Activity implements Observer,View.OnClickListe
             case R.id.save_data_btn:
                 if(processBtsData.isSaveToDb()){
                     processBtsData.setSaveToDb(false);
-                    saveDataBtn.setBackgroundResource(R.drawable.btn_green_style);
+                    saveDataBtn.setText("保存数据");
                 }
                 else{
                     processBtsData.setSaveToDb(true);
-                    saveDataBtn.setBackgroundResource(R.drawable.btn_red_style);
+                    saveDataBtn.setText("数据保存中");
                 }
                 break;
         }
-
     }
 
     private View maplayoutView;
@@ -727,6 +680,11 @@ public class MainActivity extends Activity implements Observer,View.OnClickListe
                         intent4.setClass(context,OffLineActivity.class);
                         startActivity(intent4);
                         break;
+                    case 5:
+                        Intent intent5 = new Intent();
+                        intent5.setClass(context,TrackActivity.class);
+                        startActivity(intent5);
+                        break;
                 }
             }
 
@@ -780,9 +738,10 @@ public class MainActivity extends Activity implements Observer,View.OnClickListe
             R.drawable.system_setting,
             R.drawable.dingdian,
             R.drawable.yidong,
+            R.drawable.yidong
     };
 
-    private String[] gridItemText = {"基站查询","数据导出","系统设置","定点采集","离线地图"};
+    private String[] gridItemText = {"基站查询","数据导出","系统设置","定点采集","离线地图","轨迹查询"};
 
 
     private TextView listHeadLacTv,listHeadCiTv,listHeadArfcnTv,listHeadPciTv,listHeadRssiTv;

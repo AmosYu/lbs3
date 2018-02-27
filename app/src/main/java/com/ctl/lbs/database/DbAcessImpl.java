@@ -390,7 +390,35 @@ public class DbAcessImpl implements DbAccess {
     }
 
 
-    public ArrayList<LatLng> findPos(String mnc, String lac, String cellid) {
+    public ArrayList<LatLng> findPos(BtsType btsType, String lac, String cellid) {
+        String mnc = "00";
+        switch (btsType){
+            case GSM_MOBILE:
+                mnc = "00";
+                break;
+            case GSM_UNICOM:
+                mnc = "01";
+                break;
+            case LTE_MOBILE:
+                mnc = "00";
+                break;
+            case LTE_UNICOM:
+                mnc = "01";
+                break;
+            case LTE_TELECOM:
+                mnc = "11";
+                break;
+            case WCDMA:
+                mnc = "01";
+                break;
+            case TDSCDMA:
+                mnc = "00";
+                break;
+            case CDMA:
+                mnc = "03";
+                break;
+        }
+
         ArrayList<LatLng> list = new ArrayList<>();
         if (rizhi!=null) {
             Cursor cursor = rizhi.rawQuery("select lat,lon from cellinfo where mnc =? and lac =? and ci =? ",new String[]{mnc, lac, cellid});
@@ -413,20 +441,20 @@ public class DbAcessImpl implements DbAccess {
     public List<LuceCellInfo> findBtsUseId(String lac, String ci) {
         List<LuceCellInfo> list = new ArrayList<>();
 
-        Cursor cursor = dbRead.rawQuery("select LAC,CI,CELL_TYPE,latitude,longitude,address,arfcn,PCI,rssi,time,btsType from backupData where LAC=? AND CI=?",
+        Cursor cursor = dbRead.rawQuery("select LAC,CI,CELL_TYPE,latitude,longitude,arfcn,PCI,rssi,time,btsType from backupData where LAC=? AND CI=?",
                 new String[]{lac, ci});
         while (cursor.moveToNext()) {
             LuceCellInfo lci = new LuceCellInfo();
             lci.setLac(cursor.getInt(0));
             lci.setCellId(cursor.getInt(1));
-            lci.setCellType(cursor.getString(3));
-            lci.setLatitudeGps(cursor.getDouble(4));
-            lci.setLongitudeGps(cursor.getDouble(5));
-            lci.setArfcnA(cursor.getInt(6));
-            lci.setArfcnB(cursor.getInt(7));
-            lci.setRssi(cursor.getInt(8));
-            lci.setTime(String.valueOf(cursor.getInt(9)));
-            lci.setBtsType(BtsType.strToBtsType(cursor.getString(10)));
+            lci.setCellType(cursor.getString(2));
+            lci.setLatitudeGps(cursor.getDouble(3));
+            lci.setLongitudeGps(cursor.getDouble(4));
+            lci.setArfcnA(cursor.getInt(5));
+            lci.setArfcnB(cursor.getInt(6));
+            lci.setRssi(cursor.getInt(7));
+            lci.setTime(String.valueOf(cursor.getInt(8)));
+            lci.setBtsType(BtsType.strToBtsType(cursor.getString(9)));
             list.add(lci);
         }
         return list;

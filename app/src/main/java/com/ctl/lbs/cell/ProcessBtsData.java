@@ -75,10 +75,10 @@ public class ProcessBtsData extends Observable{
                 return lteMobileList;
 
             case LTE_UNICOM:
-                return gsmMobileList;
+                return lteUnicomList;
 
             case LTE_TELECOM:
-                return gsmMobileList;
+                return lteTelecomList;
 
             case CDMA:
                 return cdmaTelecomList;
@@ -91,8 +91,6 @@ public class ProcessBtsData extends Observable{
         }
         return new ArrayList<LuceCellInfo>();
     }
-
-
 
     private double latitude=0,longitude=0;
 
@@ -107,6 +105,7 @@ public class ProcessBtsData extends Observable{
             this.number = Integer.parseInt(revMsgSplit[0]);
             setChanged();
             notifyObservers("CLEAR");
+            bluetoothConn.sendCmd("BC+SETGPS=116.327187,39.975637,4.9E-324");
             Utils.delay(500);
             gsmMobileList.clear();
             lteUnicomList.clear();
