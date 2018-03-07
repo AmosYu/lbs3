@@ -96,8 +96,17 @@ public class ProcessBtsData extends Observable{
 
     private LatLng lastPoint = null;
 
+    /**
+     * GPS 是否有效的标识 true 有效
+     */
     private boolean gpsEffective= false;
 
+    /**
+     *
+     * @param cmd 消息类型
+     * @param revMsg 消息内容
+     * @throws ArrayIndexOutOfBoundsException
+     */
     public void revData(String cmd,String revMsg) throws ArrayIndexOutOfBoundsException{
 
         String revMsgSplit[] = revMsg.split(":");

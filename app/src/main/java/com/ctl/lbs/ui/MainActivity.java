@@ -703,8 +703,7 @@ public class MainActivity extends Activity implements Observer,View.OnClickListe
 
     private void showListDialog() {
         final String[] items = { "1秒","2秒","3秒","4秒","5秒","8秒","10秒","20秒","30秒","60秒" };
-        final AlertDialog.Builder listDialog =
-                new AlertDialog.Builder(MainActivity.this);
+        final AlertDialog.Builder listDialog = new AlertDialog.Builder(MainActivity.this);
         listDialog.setTitle("设置采集周期");
         listDialog.setItems(items, new DialogInterface.OnClickListener() {
             @Override
