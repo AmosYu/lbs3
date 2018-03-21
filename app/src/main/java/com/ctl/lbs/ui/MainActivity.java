@@ -691,6 +691,12 @@ public class MainActivity extends Activity implements Observer,View.OnClickListe
         });
 
         logoView=(TextView)findViewById(R.id.main_top_left);
+        logoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bluetoothConn.sendCmd("BC+SETLTE=1");
+            }
+        });
         gpsView = (TextView)findViewById(R.id.main_top_gps);
         frequencyBtn = (Button)findViewById(R.id.frequency_btn);
         frequencyBtn.setOnClickListener(new View.OnClickListener() {
