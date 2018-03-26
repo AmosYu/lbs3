@@ -4,12 +4,14 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.io.File;
+
 /**
  * Created by yuxingyu on 16/5/23.
  */
 public class DetectiveHelper extends SQLiteOpenHelper {
 
-    private static final String DB_NAME ="LUCE.db";
+    public static final String DB_NAME =  SDBHelper.DB_DIR + File.separator + "LUCE.db";
 
     private static final int VERSION = 1;
 
@@ -19,7 +21,6 @@ public class DetectiveHelper extends SQLiteOpenHelper {
         super(context, DB_NAME, null, VERSION);
     }
 
-
     public static DetectiveHelper getInstance(Context context){
         if(detectiveHelper==null){
             detectiveHelper = new DetectiveHelper(context);
@@ -27,8 +28,6 @@ public class DetectiveHelper extends SQLiteOpenHelper {
         return detectiveHelper;
     }
 
-
-    @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table userMark(mark text,upload Integer,latitude Double,longitude Double)");
         db.execSQL("create table wifiData(mark text,MAC text,TYPE,text,RSSI Integer,latitude Double,longitude Double,baiduLatitude Double,baiduLongitude Double)");
@@ -51,8 +50,6 @@ public class DetectiveHelper extends SQLiteOpenHelper {
                 "baiduLongitude Double"+")");
     }
 
-
-    @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS backup");
         onCreate(db);
